@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
@@ -7,14 +7,14 @@ import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase
 const ListAreas = () => {
 
     const nav = useNavigation()
-    const [places, setPlaces] = useState()
+    // const [places, setPlaces] = useState()
 
-    useEffect(() => {
-        const getPlaces = async () => {
-            const data = await getDocs(journey)
-            setPlaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        }
-    }, [])
+    // useEffect(() => {
+    //     const getPlaces = async () => {
+    //         const data = await getDocs(journey)
+    //         setPlaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    //     }
+    // }, [])
 
 
     return (
@@ -54,31 +54,21 @@ const ListAreas = () => {
                         Start Journey
                     </Text>
                 </TouchableOpacity>
-                {
-                    places.map((place) => {
-                        return (
-                            <TouchableOpacity
-                                style={[styles.btnCard]}
-                            // onPress={}
-                            >
-                                <Text
-                                    style={styles.cardText}
-                                >
-                                    {
-                                        place.place_name
-                                    }
-                                </Text>
-                                <Text
-                                    style={styles.cardTitle}
-                                >
-                                    {
-                                        place.distance
-                                    }
-                                </Text>
-                            </TouchableOpacity>
-                        )
-                    })
-                }
+                <TouchableOpacity
+                    style={[styles.btnCard]}
+                // onPress={}
+                >
+                    <Text
+                        style={styles.cardText}
+                    >
+                        Place Name
+                    </Text>
+                    <Text
+                        style={styles.cardTitle}
+                    >
+                        Distance from Source
+                    </Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     )
