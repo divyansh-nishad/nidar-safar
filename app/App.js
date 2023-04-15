@@ -9,6 +9,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import PlanJourney from './screens/PlanJourney';
 import AccidentAreas from './screens/AccidentAreas';
 import ReportCrash from './screens/ReportCrash';
+import ListAreas from './screens/ListAreas';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,10 @@ export default function App() {
         <Stack.Screen
           name="ReportCrash"
           component={ReportCrash}
+        />
+        <Stack.Screen
+          name="ListAreas"
+          component={ListAreas}
         />
       </Stack.Navigator>
     </NavigationContainer>

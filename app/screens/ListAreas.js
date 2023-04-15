@@ -3,14 +3,17 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const AccidentAreas = () => {
+const ListAreas = () => {
+
+    const nav = useNavigation()
+
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
                 <TouchableOpacity
                     style={styles.back}
                     onPress={() => {
-                        nav.navigate('Home')
+                        nav.navigate('PlanJourney')
                     }}
                 >
                     <Ionicons name="arrow-back" size={24} color="black" />
@@ -37,7 +40,7 @@ const AccidentAreas = () => {
                     <Text
                         style={styles.cardTitle}
                     >
-                        Severity: High
+                        Distance from Source
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -52,7 +55,7 @@ const AccidentAreas = () => {
                     <Text
                         style={styles.cardTitle}
                     >
-                        Severity: High
+                        Distance from Source
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -67,7 +70,7 @@ const AccidentAreas = () => {
                     <Text
                         style={styles.cardTitle}
                     >
-                        Severity: High
+                        Distance from Source
                     </Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -75,7 +78,7 @@ const AccidentAreas = () => {
     )
 }
 
-export default AccidentAreas
+export default ListAreas
 
 const styles = StyleSheet.create({
     container: {
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         // flexDirection: 'row',
         // alignItems: 'center',
-        gap: 10,
+        gap: 20,
     },
     cardText: {
         fontSize: 20,

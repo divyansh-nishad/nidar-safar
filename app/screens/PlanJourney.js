@@ -1,8 +1,14 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const PlanJourney = () => {
+    const nav = useNavigation()
+
+    const [source, setSource] = useState('')
+    const [destination, setDestination] = useState('')
+
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
@@ -39,13 +45,15 @@ const PlanJourney = () => {
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity
-                    // onPress={handleLogin}
+                    onPress={() => {
+                        nav.navigate('ListAreas')
+                    }}
                     style={styles.btn}
                 >
                     <Text
                         style={styles.btnText}
                     >
-                        Login
+                        Go
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -94,26 +102,15 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     btn: {
-        backgroundColor: '#0782F9',
+        backgroundColor: '#000',
         width: '100%',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
     },
-    btnOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#0782F9',
-        borderWidth: 2,
-    },
     btnText: {
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
-    },
-    btnOutlineText: {
-        color: '#0782F9',
-        fontWeight: '700',
-        fontSize: 16,
-    },
+    }
 })
