@@ -6,6 +6,7 @@ import { getAnalytics } from "firebase/analytics"
 const firebaseConfig = {
     apiKey: "AIzaSyAXIivd-wdiw83snKVfxXnzW_xgQ_3Zk1s",
     authDomain: "nidar-safar.firebaseapp.com",
+    databaseURL: "https://nidar-safar-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "nidar-safar",
     storageBucket: "nidar-safar.appspot.com",
     messagingSenderId: "943091784149",

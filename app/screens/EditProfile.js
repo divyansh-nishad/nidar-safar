@@ -1,21 +1,17 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const PlanJourney = () => {
+const EditProfile = () => {
     const nav = useNavigation()
-
-    const [source, setSource] = useState('')
-    const [destination, setDestination] = useState('')
-
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
                 <TouchableOpacity
                     style={styles.back}
                     onPress={() => {
-                        nav.navigate('Home')
+                        nav.navigate('Profile')
                     }}
                 >
                     <Ionicons name="arrow-back" size={24} color="black" />
@@ -24,20 +20,26 @@ const PlanJourney = () => {
                 <Text
                     style={styles.navTitle}
                 >
-                    Plan Journey
+                    Edit Profile
                 </Text>
             </View>
             <View
                 style={styles.inputContainer}
             >
                 <TextInput
-                    placeholder='Source'
+                    placeholder='Vehicle Number'
                     // value={email}
                     // onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
                 <TextInput
-                    placeholder='Destination'
+                    placeholder='Vehicle Type'
+                    // value={password}
+                    // onChangeText={text => setPassword(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    placeholder='Mobile Number'
                     // value={password}
                     // onChangeText={text => setPassword(text)}
                     style={styles.input}
@@ -53,7 +55,7 @@ const PlanJourney = () => {
                     <Text
                         style={styles.btnText}
                     >
-                        Go
+                        Add
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -61,7 +63,7 @@ const PlanJourney = () => {
     )
 }
 
-export default PlanJourney
+export default EditProfile
 
 const styles = StyleSheet.create({
     container: {
@@ -112,5 +114,5 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
-    }
+    },
 })

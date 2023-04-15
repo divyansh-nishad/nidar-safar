@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         // backgroundColor: '#fff',
+        paddingTop: 20,
         alignItems: 'center',
         // justifyContent: 'center',
         // paddingHorizontal: 20,
@@ -130,7 +131,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     titleUsername: {
-        fontSize: 40,
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     profile: {
         padding: 10,
