@@ -15,3 +15,6 @@ app/.DS_Store
 
 # Temporary files created by Metro to check the health of the file watcher
 app/.metro-health-check*
+
+#ML Dataset
+Machine Learning Model/accidents_2012_to_2014.csv
