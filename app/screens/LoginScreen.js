@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { auth } from '../firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -12,7 +12,21 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log(user.email)
+                console.log("Registered: ", user.email)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, " | ", errorMessage)
+            });
+    }
+
+    const handleLogin = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log("Logged In: ", user.email)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -45,7 +59,7 @@ const LoginScreen = () => {
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity
-                    onPress={() => { }}
+                    onPress={handleLogin}
                     style={styles.btn}
                 >
                     <Text
