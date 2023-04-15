@@ -12,13 +12,13 @@ export default function App() {
       <Stack.Navigator options={{
         headerShown: false,
       }}>
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{
             headerShown: false,
           }}
           name="Login"
           component={LoginScreen}
-        /> */}
+        />
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
