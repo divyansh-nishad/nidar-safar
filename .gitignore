@@ -56,8 +56,8 @@ app/**/fastlane/test_output
 app/*.jsbundle
 
 # Ruby / CocoaPods
-app//ios/Pods/
-app//vendor/bundle/
+app/ios/Pods/
+app/vendor/bundle/
 
 # Temporary files created by Metro to check the health of the file watcher
 app/.metro-health-check*
