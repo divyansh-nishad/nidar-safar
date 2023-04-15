@@ -61,3 +61,4 @@ app//vendor/bundle/
 
 # Temporary files created by Metro to check the health of the file watcher
 app/.metro-health-check*
+Machine Learning Model/accidents_2012_to_2014.csv
