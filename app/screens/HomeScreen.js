@@ -3,8 +3,8 @@ import React from 'react'
 
 const HomeScreen = () => {
     return (
-        <View>
-            <Text>HomeScreen</Text>
+        <View style={{ flex: 1, height: '100%', width: '100%' }}>
+            <Text style={{ marginTop: 40, marginLeft: 20, fontSize: 21 }}> Welcome Shivam</Text>
         </View>
     )
 }
