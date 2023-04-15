@@ -15,6 +15,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import { push, ref } from 'firebase/database'
 import { auth, rt } from '../firebase'
+import RNShake from 'react-native-shake';
+import call from 'react-native-phone-call'
+// import * as Speech from 'expo-speech';
 
 const InJourney = () => {
     const nav = useNavigation()
@@ -22,19 +25,6 @@ const InJourney = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const [user, setUser] = useState()
 
-    const handleReport = async () => {
-        const reportRef = ref(rt, 'reports')
-        const report = {
-            location: location,
-            reportedBy: {
-                email: user.email,
-                uid: user.uid
-            },
-        }
-        await push(reportRef, report)
-        ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
-        nav.navigate('Home')
-    }
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -55,6 +45,27 @@ const InJourney = () => {
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
         })();
+
+        RNShake.addListener(() => {
+            const args = {
+                number: '112',
+                prompt: false,
+                skipCanOpen: true,
+            }
+            call(args).catch(console.error)
+            const reportRef = ref(rt, 'reports')
+            const report = {
+                location: location,
+                reportedBy: {
+                    email: user.email,
+                    uid: user.uid
+                },
+            }
+            push(reportRef, report)
+            // ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
+            // nav.navigate('Home')
+        })
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user)
@@ -100,7 +111,9 @@ const InJourney = () => {
             {/* <View style={styles.bottom}>
                 <TouchableOpacity
                     style={[styles.btnCard]}
-                // onPress={handleReport}
+                    onPress={() => {
+                        speak()
+                    }}
                 >
                     <Text
                         style={styles.cardText}
