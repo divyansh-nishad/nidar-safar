@@ -9,6 +9,10 @@ import ProfileScreen from './screens/ProfileScreen';
 import PlanJourney from './screens/PlanJourney';
 import AccidentAreas from './screens/AccidentAreas';
 import ReportCrash from './screens/ReportCrash';
+import ListAreas from './screens/ListAreas';
+import AddFamily from './screens/AddFamily';
+import EditProfile from './screens/EditProfile';
+import InJourney from './screens/InJourney';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,10 +34,10 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Onboarding"
           component={Onboarding}
-        />
+        /> */}
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -57,6 +61,22 @@ export default function App() {
         <Stack.Screen
           name="ReportCrash"
           component={ReportCrash}
+        />
+        <Stack.Screen
+          name="ListAreas"
+          component={ListAreas}
+        />
+        <Stack.Screen
+          name="AddFamily"
+          component={AddFamily}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+        />
+        <Stack.Screen
+          name="InJourney"
+          component={InJourney}
         />
       </Stack.Navigator>
     </NavigationContainer>

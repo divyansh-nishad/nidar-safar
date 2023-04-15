@@ -25,7 +25,7 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log("Registered: ", user.email)
+                console.log("Registered: ", user)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -39,7 +39,7 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log("Logged In: ", user.email)
+                console.log("Logged In: ", user)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     inputContainer: {
-        width: '80%'
+        paddingHorizontal: 20,
+        width: '100%'
     },
     input: {
         backgroundColor: 'white',
@@ -116,13 +117,14 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     btnContainer: {
-        width: '60%',
+        paddingHorizontal: 20,
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 40,
     },
     btn: {
-        backgroundColor: '#0782F9',
+        backgroundColor: '#000',
         width: '100%',
         padding: 15,
         borderRadius: 10,
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
     btnOutline: {
         backgroundColor: 'white',
         marginTop: 5,
-        borderColor: '#0782F9',
+        borderColor: '#000',
         borderWidth: 2,
     },
     btnText: {
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     btnOutlineText: {
-        color: '#0782F9',
+        color: '#000',
         fontWeight: '700',
         fontSize: 16,
     },

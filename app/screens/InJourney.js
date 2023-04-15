@@ -11,30 +11,20 @@ import { useNavigation } from '@react-navigation/native'
 // App.js
 import { Easing } from 'react-native-reanimated'
 import { MotiView } from 'moti'
-import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import { push, ref } from 'firebase/database'
 import { auth, rt } from '../firebase'
+import RNShake from 'react-native-shake';
+import call from 'react-native-phone-call'
+// import * as Speech from 'expo-speech';
 
-const ReportCrash = () => {
+const InJourney = () => {
     const nav = useNavigation()
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [user, setUser] = useState()
 
-    const handleReport = async () => {
-        const reportRef = ref(rt, 'reports')
-        const report = {
-            location: location,
-            reportedBy: {
-                email: user.email,
-                uid: user.uid
-            },
-        }
-        await push(reportRef, report)
-        ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
-        nav.navigate('Home')
-    }
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -55,6 +45,26 @@ const ReportCrash = () => {
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
         })();
+
+        RNShake.addListener(() => {
+            const args = {
+                number: '112',
+                prompt: false,
+                skipCanOpen: true,
+            }
+            call(args).catch(console.error)
+            const reportRef = ref(rt, 'reports')
+            const report = {
+                location: location,
+                vehicleType: user.vehicleType,
+                vehicleNumber: user.vehicleNumber,
+                userName: user.email
+            }
+            push(reportRef, report)
+            // ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
+            // nav.navigate('Home')
+        })
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user)
@@ -94,29 +104,29 @@ const ReportCrash = () => {
                             />
                         )
                     })}
-                    <Entypo name="warning" size={64} color="#fff" />
+                    <FontAwesome5 name="location-arrow" size={64} color="#fff" />
                 </View>
             </View>
-            <View style={styles.bottom}>
+            {/* <View style={styles.bottom}>
                 <TouchableOpacity
                     style={[styles.btnCard]}
-                    onPress={handleReport}
+                    onPress={() => {
+                        speak()
+                    }}
                 >
                     <Text
                         style={styles.cardText}
                     >
-                        {
-                            text
-                        }
+                        On You Way
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <StatusBar style="auto" />
         </View>
     )
 }
 
-export default ReportCrash
+export default InJourney
 
 const styles = StyleSheet.create({
     container: {
@@ -137,7 +147,7 @@ const styles = StyleSheet.create({
     },
     circle: {
         padding: 20,
-        backgroundColor: '#E31837',
+        backgroundColor: '#000',
         borderRadius: 100,
     },
     bottom: {
