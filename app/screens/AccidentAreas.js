@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 const AccidentAreas = () => {
+    const nav = useNavigation()
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
