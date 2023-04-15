@@ -10,28 +10,28 @@ import ProfileScreen from './screens/ProfileScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const unregister = auth.onAuthStateChanged(exist => {
-      if (exist) setUser(exist);
-      else setUser(null);
-    });
+  // const [user, setUser] = useState(null);
+  // useEffect(() => {
+  //   const unregister = auth.onAuthStateChanged(exist => {
+  //     if (exist) setUser(exist);
+  //     else setUser(null);
+  //   });
 
-    return () => {
-      unregister();
-    };
-  }, [user]);
+  //   return () => {
+  //     unregister();
+  //   };
+  // }, [user]);
   return (
     <NavigationContainer>
       <Stack.Navigator options={{
         headerShown: false,
-      }}>{user ?
+      }}>
+        {/* {user ?
         (
           <>
             <Stack.Screen
               name="Onboarding"
               component={Onboarding}
-
             /><Stack.Screen
               options={{
                 headerShown: false,
@@ -46,7 +46,7 @@ export default function App() {
               component={HomeScreen}
 
             />
-          </>)}
+          </>)} */}
 
         <Stack.Screen
           options={{
