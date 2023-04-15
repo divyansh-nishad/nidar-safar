@@ -56,10 +56,9 @@ const InJourney = () => {
             const reportRef = ref(rt, 'reports')
             const report = {
                 location: location,
-                reportedBy: {
-                    email: user.email,
-                    uid: user.uid
-                },
+                vehicleType: user.vehicleType,
+                vehicleNumber: user.vehicleNumber,
+                userName: user.email
             }
             push(reportRef, report)
             // ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
