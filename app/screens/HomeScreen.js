@@ -5,15 +5,36 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { auth } from '../firebase';
+import { auth, rt } from '../firebase';
+import { onValue, ref } from 'firebase/database';
 
 const HomeScreen = () => {
 
     const [user, setUser] = useState()
+    const [users, setUsers] = useState()
+    const [currentUser, setCurrentUser] = useState()
 
     const nav = useNavigation()
 
     useEffect(() => {
+        // const getUser = async () => {
+        //     const userRef = ref(rt, 'Users')
+        //     await onValue(userRef, (snapshot) => {
+        //         const data = snapshot.val()
+        //         let users = []
+        //         for (let id in data) {
+        //             users.push({ id, ...data[id] })
+        //         }
+        //         setUsers(users)
+        //         let currentUser = {}
+        //         for (let id in users) {
+        //             if (users[id].id === user.uid) {
+        //                 currentUser = users[id]
+        //             }
+        //         }
+        //         setCurrentUser(currentUser)
+        //     })
+        // }
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user)
@@ -29,7 +50,7 @@ const HomeScreen = () => {
                     <Text style={styles.titleGreet}>Welcome</Text>
                     <Text style={styles.titleUsername}>
                         {
-                            user ? user.email : 'User'
+                            currentUser ? user.email : 'User'
                         }
                     </Text>
                 </View>

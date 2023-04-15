@@ -17,21 +17,18 @@ import { push, ref } from 'firebase/database'
 import { auth, rt } from '../firebase'
 import RNShake from 'react-native-shake';
 import call from 'react-native-phone-call'
-// import * as Speech from 'expo-speech';
+import * as Speech from 'expo-speech';
 
 const InJourney = () => {
     const nav = useNavigation()
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [user, setUser] = useState()
+    // const thingToSay = 'Hello';
 
-
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = 'Report a Crash'
-    }
+    // const speak = () => {
+    //     Speech.speak(thingToSay);
+    // };
 
     useEffect(() => {
         (async () => {
@@ -72,6 +69,13 @@ const InJourney = () => {
         })
         return unsubscribe
     }, []);
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = 'Report a Crash'
+    }
 
     return (
         <View
@@ -117,7 +121,9 @@ const InJourney = () => {
                     <Text
                         style={styles.cardText}
                     >
-                        On You Way
+                        {
+                            thingToSay
+                        }
                     </Text>
                 </TouchableOpacity>
             </View> */}

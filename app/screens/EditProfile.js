@@ -1,10 +1,52 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { push, ref } from 'firebase/database';
+import { auth, rt } from '../firebase';
 
 const EditProfile = () => {
     const nav = useNavigation()
+    const [id, setId] = useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
+    const [vehicleType, setVehicleType] = useState('')
+    const [vehicleNumber, setVehicleNumber] = useState('')
+    const [relativeName, setRelativeName] = useState('')
+    const [relativeMobile, setRelativeMobile] = useState('')
+    const [relativeRelation, setRelativeRelation] = useState('')
+    const [user, setUser] = useState()
+
+    const editUser = async () => {
+        const userRef = ref(rt, 'Users')
+        const userData = {
+            id: user.uid,
+            name: name,
+            email: user.email,
+            mobile: mobile,
+            vehicleType: vehicleType,
+            vehicleNumber: vehicleNumber,
+            relative: {
+                name: relativeName,
+                mobile: relativeMobile,
+                relation: relativeRelation,
+            }
+        }
+        await push(userRef, userData)
+        ToastAndroid.show('Data added successfully!', ToastAndroid.SHORT);
+        nav.navigate('Home')
+    }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user)
+            }
+        })
+        return unsubscribe
+    }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
@@ -27,29 +69,60 @@ const EditProfile = () => {
                 style={styles.inputContainer}
             >
                 <TextInput
-                    placeholder='Vehicle Number'
-                    // value={email}
-                    // onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
-                <TextInput
-                    placeholder='Vehicle Type'
-                    // value={password}
-                    // onChangeText={text => setPassword(text)}
+                    placeholder='Name'
+                    value={name}
+                    onChangeText={(text) => setName(text)}
                     style={styles.input}
                 />
                 <TextInput
                     placeholder='Mobile Number'
-                    // value={password}
-                    // onChangeText={text => setPassword(text)}
+                    value={mobile}
+                    onChangeText={(text) => setMobile(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    placeholder='Vehicle Type'
+                    value={vehicleType}
+                    onChangeText={text => setVehicleType(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    placeholder='Vehicle Number'
+                    value={vehicleNumber}
+                    onChangeText={text => setVehicleNumber(text)}
+                    style={styles.input}
+                />
+            </View>
+            <View
+                style={styles.inputContainer}
+            >
+                <Text
+                    style={styles.header}
+                >
+                    Relative's Information
+                </Text>
+                <TextInput
+                    placeholder='Relative Name'
+                    value={relativeName}
+                    onChangeText={(text) => setRelativeName(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    placeholder='Relative Mobile Number'
+                    value={relativeMobile}
+                    onChangeText={(text) => setRelativeMobile(text)}
+                    style={styles.input}
+                />
+                <TextInput
+                    placeholder='Relation with the relative'
+                    value={relativeRelation}
+                    onChangeText={text => setRelativeRelation(text)}
                     style={styles.input}
                 />
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity
-                    onPress={() => {
-                        nav.navigate('ListAreas')
-                    }}
+                    onPress={editUser}
                     style={styles.btn}
                 >
                     <Text
@@ -87,7 +160,8 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         paddingHorizontal: 20,
-        width: '100%'
+        width: '100%',
+        paddingBottom: 20
     },
     input: {
         backgroundColor: 'white',
@@ -115,4 +189,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 16,
     },
+    header: {
+        fontWeight: 'bold'
+    }
 })
