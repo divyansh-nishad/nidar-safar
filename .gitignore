@@ -18,3 +18,4 @@ app/.metro-health-check*
 
 #ML Dataset
 Machine Learning Model/accidents_2012_to_2014.csv
+Machine Learning Model/voting_model.sav
