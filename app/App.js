@@ -12,6 +12,7 @@ import ReportCrash from './screens/ReportCrash';
 import ListAreas from './screens/ListAreas';
 import AddFamily from './screens/AddFamily';
 import EditProfile from './screens/EditProfile';
+import InJourney from './screens/InJourney';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,10 @@ export default function App() {
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
+        />
+        <Stack.Screen
+          name="InJourney"
+          component={InJourney}
         />
       </Stack.Navigator>
     </NavigationContainer>

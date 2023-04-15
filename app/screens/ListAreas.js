@@ -29,6 +29,22 @@ const ListAreas = () => {
                 style={styles.vCards}
             >
                 <TouchableOpacity
+                    style={[styles.btnCard, {
+                        backgroundColor: '#000'
+                    }]}
+                    onPress={() => {
+                        nav.navigate('InJourney')
+                    }}
+                >
+                    <Text
+                        style={[styles.cardText, {
+                            color: '#fff'
+                        }]}
+                    >
+                        Start Journey
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     style={[styles.btnCard]}
                 // onPress={}
                 >
