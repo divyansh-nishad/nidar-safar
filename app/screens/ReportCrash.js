@@ -1,6 +1,6 @@
 
-import { StatusBar, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import React, { Component, useLayoutEffect } from 'react'
+import { StatusBar, StyleSheet, Text, ToastAndroid, Touchable, TouchableOpacity, View } from 'react-native'
+import React, { Component, useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 // import Animated, {
 //     useSharedValue,
@@ -12,9 +12,57 @@ import { useNavigation } from '@react-navigation/native'
 import { Easing } from 'react-native-reanimated'
 import { MotiView } from 'moti'
 import { Entypo } from '@expo/vector-icons';
+import * as Location from 'expo-location';
+import { push, ref } from 'firebase/database'
+import { auth, rt } from '../firebase'
 
 const ReportCrash = () => {
     const nav = useNavigation()
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [user, setUser] = useState()
+
+    const handleReport = async () => {
+        const reportRef = ref(rt, 'reports')
+        const report = {
+            location: location,
+            reportedBy: {
+                email: user.email,
+                uid: user.uid
+            },
+        }
+        await push(reportRef, report)
+        ToastAndroid.show('Reported successfully!', ToastAndroid.SHORT);
+        nav.navigate('Home')
+    }
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = 'Report a Crash'
+    }
+
+    useEffect(() => {
+        (async () => {
+
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user)
+            }
+        })
+        return unsubscribe
+    }, []);
+
     return (
         <View
             style={styles.container}
@@ -52,13 +100,15 @@ const ReportCrash = () => {
             <View style={styles.bottom}>
                 <TouchableOpacity
                     style={[styles.btnCard]}
-                    onPress={() => {
-                        nav.navigate('Home')
-                    }}
+                    onPress={handleReport}
                 >
                     <Text
                         style={styles.cardText}
-                    >Report a Crash</Text>
+                    >
+                        {
+                            text
+                        }
+                    </Text>
                 </TouchableOpacity>
             </View>
             <StatusBar style="auto" />
