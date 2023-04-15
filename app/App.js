@@ -24,6 +24,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator options={{
         headerShown: false,
+<<<<<<< HEAD
       }}>{user ?
         (
           <>
@@ -47,6 +48,30 @@ export default function App() {
             />
           </>)}
 
+=======
+      }}>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name="Onboarding"
+          component={Onboarding}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+>>>>>>> 63b47ec9b9ceaeca51830292670f7833c49db99d
       </Stack.Navigator>
     </NavigationContainer>
   );
