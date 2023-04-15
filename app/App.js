@@ -10,6 +10,8 @@ import PlanJourney from './screens/PlanJourney';
 import AccidentAreas from './screens/AccidentAreas';
 import ReportCrash from './screens/ReportCrash';
 import ListAreas from './screens/ListAreas';
+import AddFamily from './screens/AddFamily';
+import EditProfile from './screens/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,14 @@ export default function App() {
         <Stack.Screen
           name="ListAreas"
           component={ListAreas}
+        />
+        <Stack.Screen
+          name="AddFamily"
+          component={AddFamily}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
         />
       </Stack.Navigator>
     </NavigationContainer>

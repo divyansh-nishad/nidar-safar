@@ -38,7 +38,9 @@ const ProfileScreen = () => {
             >
                 <TouchableOpacity
                     style={[styles.btnCard]}
-                // onPress={}
+                    onPress={() => {
+                        nav.navigate('EditProfile')
+                    }}
                 >
                     <Text
                         style={styles.cardText}
@@ -46,11 +48,13 @@ const ProfileScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btnCard]}
-                // onPress={}
+                    onPress={() => {
+                        nav.navigate('AddFamily')
+                    }}
                 >
                     <Text
                         style={styles.cardText}
-                    >Add Relative Mobile Number</Text>
+                    >Add Family Member Mobile Number</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btnCard, {
