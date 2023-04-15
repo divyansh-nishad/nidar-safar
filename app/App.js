@@ -6,35 +6,57 @@ import Onboarding from './Additional/onBoarding';
 import { useEffect, useState } from 'react';
 import { auth } from './firebase';
 import ProfileScreen from './screens/ProfileScreen';
+import PlanJourney from './screens/PlanJourney';
+import AccidentAreas from './screens/AccidentAreas';
+import ReportCrash from './screens/ReportCrash';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user)
+      }
+    })
+    return unsubscribe
+  }, [])
   return (
     <NavigationContainer>
-      <Stack.Navigator options={{
-        headerShown: false,
-      }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
-          options={{
-            headerShown: false,
-          }}
         />
         <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
           name="Login"
           component={LoginScreen}
         />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            headerShown: false,
-          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+        />
+        <Stack.Screen
+          name="PlanJourney"
+          component={PlanJourney}
+        />
+        <Stack.Screen
+          name="AccidentAreas"
+          component={AccidentAreas}
+        />
+        <Stack.Screen
+          name="ReportCrash"
+          component={ReportCrash}
         />
       </Stack.Navigator>
     </NavigationContainer>
