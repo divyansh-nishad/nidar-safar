@@ -13,3 +13,7 @@ Crash Analysis and Prediction System (C.A.P.S)
 - Machine Learning
 - Flask
 - Google Maps
+
+## Achieved accuracy of ML Model
+
+86.3% using voting classifier.
