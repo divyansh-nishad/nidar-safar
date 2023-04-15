@@ -8,12 +8,12 @@ const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const navigate = useNavigation()
+    const nav = useNavigation()
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                navigate.navigate('Home')
+                nav.navigate('Home')
             }
         })
         return unsubscribe

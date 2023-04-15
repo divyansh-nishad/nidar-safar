@@ -1,24 +1,42 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { auth } from '../firebase';
 
 const HomeScreen = () => {
-    const navigate = useNavigation()
+
+    const [user, setUser] = useState()
+
+    const nav = useNavigation()
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user)
+            }
+        })
+        return unsubscribe
+    }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.nav}>
                 <View style={styles.titleContianer}>
                     <Text style={styles.titleGreet}>Welcome</Text>
-                    <Text style={styles.titleUsername}>@username</Text>
+                    <Text style={styles.titleUsername}>
+                        {
+                            user ? user.email : 'User'
+                        }
+                    </Text>
                 </View>
                 <TouchableOpacity
                     style={styles.profile}
                     onPress={() => {
-                        navigate.navigate('Profile')
+                        nav.navigate('Profile')
                     }}
                 >
                     <Feather name="user" size={24} color="black" />
@@ -46,6 +64,9 @@ const HomeScreen = () => {
             >
                 <TouchableOpacity
                     style={[styles.btnCard]}
+                    onPress={() => {
+                        nav.navigate('PlanJourney')
+                    }}
                 >
                     <MaterialIcons name="place" size={24} color="black" />
                     <Text
@@ -54,6 +75,9 @@ const HomeScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btnCard]}
+                    onPress={() => {
+                        nav.navigate('AccidentAreas')
+                    }}
                 >
                     <AntDesign name="eye" size={24} color="black" />
                     <Text
@@ -64,6 +88,9 @@ const HomeScreen = () => {
                     style={[styles.btnCard, {
                         backgroundColor: '#E31837'
                     }]}
+                    onPress={() => {
+                        nav.navigate('ReportCrash')
+                    }}
                 >
                     <FontAwesome5 name="car-crash" size={24} color="white" />
                     <Text
@@ -82,7 +109,7 @@ const styles = StyleSheet.create({
         // flex: 1,
         // backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         // paddingHorizontal: 20,
     },
     nav: {
