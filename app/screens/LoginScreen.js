@@ -1,26 +1,27 @@
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     return (
         <KeyboardAvoidingView
             style={styles.container}
-            behavior="padding"
+        // behavior="padding"
         >
             <View
                 style={styles.inputContainer}
             >
                 <TextInput
                     placeholder='email'
-                    // value={ }
-                    // onChangeText={ }
+                    value={email}
+                    onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
                 <TextInput
                     placeholder='password'
-                    // value={ }
-                    // onChangeText={ }
+                    value={password}
+                    onChangeText={text => setPassword(text)}
                     style={styles.input}
                     secureTextEntry
                 />
