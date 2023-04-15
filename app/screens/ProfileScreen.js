@@ -27,7 +27,9 @@ const ProfileScreen = () => {
                     <Ionicons name="arrow-back" size={24} color="black" />
 
                 </TouchableOpacity>
-                <Text>
+                <Text
+                    style={styles.navTitle}
+                >
                     Profile
                 </Text>
             </View>
@@ -40,7 +42,15 @@ const ProfileScreen = () => {
                 >
                     <Text
                         style={styles.cardText}
-                    >Add Mobile Number</Text>
+                    >Edit Profile</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.btnCard]}
+                // onPress={}
+                >
+                    <Text
+                        style={styles.cardText}
+                    >Add Relative Mobile Number</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btnCard, {
@@ -74,6 +84,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
+    },
+    navTitle: {
+        fontWeight: 'bold',
     },
     back: {
         padding: 10,
