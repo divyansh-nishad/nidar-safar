@@ -12,7 +12,6 @@ import { useNavigation } from '@react-navigation/native'
 import { Easing } from 'react-native-reanimated'
 import { MotiView } from 'moti'
 import { Entypo } from '@expo/vector-icons';
-import SlideButton from 'rn-slide-button';
 
 const ReportCrash = () => {
     const nav = useNavigation()
